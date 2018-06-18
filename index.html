@@ -116,6 +116,16 @@
 	</div>
 
 	<script>
+		if (window.netlifyIdentity) {
+			window.netlifyIdentity.on("init", function(user) {
+				if (!user) {
+					window.netlifyIdentity.on("login", function() {
+						document.location.href = "/admin/";
+					});
+				}
+			});
+		}
+
 		/* global Vue VueRouter */
 		window.addEventListener('HTMLImportsLoaded', function() { // IE11 polyfill through webcomponents.org.
 			window.app = new Vue({
@@ -137,19 +147,6 @@
 				})
 			});
 		});
-	</script>
-
-
-	<script>
-		if (window.netlifyIdentity) {
-			window.netlifyIdentity.on("init", function(user) {
-				if (!user) {
-					window.netlifyIdentity.on("login", function() {
-						document.location.href = "/admin/";
-					});
-				}
-			});
-		}
 	</script>
 
 </body>
