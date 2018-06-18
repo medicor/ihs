@@ -1,0 +1,15 @@
+
+$enable-shadows: false;
+$enable-gradients: true;
+$primary: #00acc1;
+$font-family-sans-serif: Rubik, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+$navbar-light-hover-color: $primary;
+$black: #000;
+$headings-font-weight: 500;
+$font-size-base: 1.1rem;
+$spacer: 1rem;
+$navbar-padding-y: $spacer;
+$navbar-light-color: rgba($black, .6);
+$navbar-nav-link-padding-x: 0.7rem;
+$navbar-light-active-color: $black;
+$navbar-padding-x: $spacer*2;
