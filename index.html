@@ -34,6 +34,7 @@
 	<!--<script src="scripts/polyfill.min.js"></script>-->
 	<script src="scripts/html-imports.min.js"></script>
 
+	<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 	<script src="scripts/vue.min.js"></script>
 	<script src="scripts/vue-router.min.js"></script>
 	<script src="scripts/bootstrap-vue.min.js"></script>
@@ -41,8 +42,20 @@
 	<link rel="import" href="components/home-section.html" />
 	<link rel="import" href="components/about-section.html" />
 	<link rel="import" href="components/member-section.html" />
-</head>
 
+	<script>
+		if (window.netlifyIdentity) {
+			window.netlifyIdentity.on("init", function(user) {
+				if (!user) {
+					window.netlifyIdentity.on("login", function() {
+						document.location.href = "/admin/";
+					});
+				}
+			});
+		}
+	</script>
+
+</head>
 <body>
 	<!-- Our application root element -->
 	<div id="app" v-cloak>
