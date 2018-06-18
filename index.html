@@ -43,18 +43,6 @@
 	<link rel="import" href="components/about-section.html" />
 	<link rel="import" href="components/member-section.html" />
 
-	<script>
-		if (window.netlifyIdentity) {
-			window.netlifyIdentity.on("init", function(user) {
-				if (!user) {
-					window.netlifyIdentity.on("login", function() {
-						document.location.href = "/admin/";
-					});
-				}
-			});
-		}
-	</script>
-
 </head>
 <body>
 	<!-- Our application root element -->
@@ -149,6 +137,19 @@
 				})
 			});
 		});
+	</script>
+
+
+	<script>
+		if (window.netlifyIdentity) {
+			window.netlifyIdentity.on("init", function(user) {
+				if (!user) {
+					window.netlifyIdentity.on("login", function() {
+						document.location.href = "/admin/";
+					});
+				}
+			});
+		}
 	</script>
 
 </body>
