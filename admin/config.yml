@@ -1,16 +1,16 @@
 backend:
   name: git-gateway
-  branch: master # Branch to update (optional; defaults to master)
-  accept_roles: #optional - accepts all users if left out
+  branch: master
+  accept_roles:
     - admin
     - editor
-    
-media_folder: "images" # Media files will be stored in the repo under images/uploads
+
+media_folder: "admin/images" # Media files will be stored in the repo under images/uploads
 
 collections:
   - name: "blurb" # Used in routes, e.g., /admin/collections/blog
     label: "Blurb" # Used in the UI
-    folder: "posts/blurb" # The path to the folder where the documents are stored
+    folder: "admin/posts/blurb" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
     fields: # The fields for each document, usually in front matter
