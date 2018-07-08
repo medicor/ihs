@@ -28,16 +28,15 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
 	<!--<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">-->
-	<link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css" />
-	<link type="text/css" rel="stylesheet" href="styles/bootstrap-vue.min.css" />
+	<link type="text/css" rel="stylesheet" href="styles/buefy.min.css" />
 	<link type="text/css" rel="stylesheet" href="styles/styles.css" />
 
 	<!--<script src="scripts/polyfill.min.js"></script>-->
 	<script src="scripts/html-imports.min.js"></script>
 
 	<script src="scripts/vue.min.js"></script>
+	<script src="scripts/buefy.min.js"></script>
 	<script src="scripts/vue-router.min.js"></script>
-	<script src="scripts/bootstrap-vue.min.js"></script>
 	<!--<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>-->
 
 	<link rel="import" href="components/home-section.html" />
@@ -118,8 +117,9 @@
 	</div>
 
 	<script>
-		/* global Vue VueRouter Quill */
+		/* global Vue VueRouter Buefy Quill */
 		window.addEventListener('HTMLImportsLoaded', function() { // IE11 polyfill through webcomponents.org.
+			Vue.use(Buefy.default);
 			window.app = new Vue({
 				el: "#app",
 				router: new VueRouter({

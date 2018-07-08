@@ -2,9 +2,9 @@
 SPA web application for International Hip Society (IHS).
 
 ## Technology stack
-- [Bootstrap-vue](https://bootstrap-vue.js.org) ([Bootstrap 4](http://getbootstrap.com/) as [Vue.js](https://vuejs.org/) components)
+- [Buefy](https://buefy.github.io/#/) ([Bulma](https://bulma.io/) as [Vue.js](https://vuejs.org/) components)
 - [Vue-router](https://router.vuejs.org/)
-- [Netlify](https://www.netlify.com/)
-- [Netlify CMS](https://www.netlifycms.org/docs/add-to-your-site/)
-- [Netlify Identity](https://www.netlify.com/docs/identity/)
-- [Firebase](https://firebase.google.com/)
+<!--- [Netlify](https://www.netlify.com/)-->
+<!--- [Netlify CMS](https://www.netlifycms.org/docs/add-to-your-site/)-->
+<!--- [Netlify Identity](https://www.netlify.com/docs/identity/)-->
+<!--- [Firebase](https://firebase.google.com/)-->
