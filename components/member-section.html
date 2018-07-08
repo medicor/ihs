@@ -1,6 +1,6 @@
 <template id="member-section">
-	<div>
-	<b-container class="my-5">
+	<div class="content-wrap">
+	<b-container>
 		<h1>Member section</h1>
 		<p>This section will be password protected and contain:</p>
 		<ul>
@@ -8,7 +8,7 @@
 			<li>Registration of meeting abstracts.</li>
 		</ul>
 	</b-container>
-	<b-container class="mb-5">
+	<b-container>
 		<b-form @submit="onSubmit" v-if="show">
 			<b-form-group id="exampleInputGroup1" label="Email address:" label-for="exampleInput1" description="We'll never share your email with anyone else.">
 				<b-form-input id="exampleInput1" type="email" v-model="form.email" required placeholder="Enter email">

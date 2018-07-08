@@ -1,6 +1,6 @@
 <template id="about-section">
-	<div>
-	<b-container class="my-5">
+	<div class="content-wrap">
+	<b-container>
 		<b-btn class="mb-5" v-b-toggle.collapse1 variant="primary">View mission description</b-btn>
 		<b-collapse id="collapse1" class="mt-2">
 			<b-card>
@@ -50,16 +50,6 @@
 		<b-card class="mb-1">
 			<b-btn href="#" v-b-toggle.accordion5>2014</b-btn>
 			<b-collapse id="accordion5" accordion="my-accordion">
-				<b-card-body>
-					<p class="card-text">
-						{{ text }}
-					</p>
-				</b-card-body>
-			</b-collapse>
-		</b-card>
-		<b-card class="mb-1">
-			<b-btn href="#" v-b-toggle.accordion6>2013</b-btn>
-			<b-collapse id="accordion6" accordion="my-accordion">
 				<b-card-body>
 					<p class="card-text">
 						{{ text }}

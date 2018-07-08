@@ -27,6 +27,7 @@
 	<link rel="manifest" href="manifest.json">
 
 	<link href="https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+	<!--<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">-->
 	<link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css" />
 	<link type="text/css" rel="stylesheet" href="styles/bootstrap-vue.min.css" />
 	<link type="text/css" rel="stylesheet" href="styles/styles.css" />
@@ -34,16 +35,17 @@
 	<!--<script src="scripts/polyfill.min.js"></script>-->
 	<script src="scripts/html-imports.min.js"></script>
 
-	<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 	<script src="scripts/vue.min.js"></script>
 	<script src="scripts/vue-router.min.js"></script>
 	<script src="scripts/bootstrap-vue.min.js"></script>
+	<!--<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>-->
 
 	<link rel="import" href="components/home-section.html" />
 	<link rel="import" href="components/about-section.html" />
 	<link rel="import" href="components/member-section.html" />
 
 </head>
+
 <body>
 	<!-- Our application root element -->
 	<div id="app" v-cloak>
@@ -65,9 +67,9 @@
 			</b-collapse>
 		</b-navbar>
 
-		<router-view></router-view>
+		<router-view class="content"></router-view>
 
-		<b-container fluid class="text-light mt-5 py-5 bg-secondary">
+		<b-container fluid class="text-light py-5 bg-secondary">
 			<b-container>
 				<b-row>
 					<b-col md="2" class="mb-4">
@@ -116,17 +118,7 @@
 	</div>
 
 	<script>
-		if (window.netlifyIdentity) {
-			window.netlifyIdentity.on("init", function(user) {
-				if (!user) {
-					window.netlifyIdentity.on("login", function() {
-						document.location.href = "/admin/";
-					});
-				}
-			});
-		}
-
-		/* global Vue VueRouter */
+		/* global Vue VueRouter Quill */
 		window.addEventListener('HTMLImportsLoaded', function() { // IE11 polyfill through webcomponents.org.
 			window.app = new Vue({
 				el: "#app",
@@ -143,9 +135,18 @@
 					}, {
 						path: '/about',
 						component: Vue.component('about-section')
-					}]
+					}],
+					scrollBehavior: function() {
+						return {
+							x: 0,
+							y: 0
+						};
+					}
 				})
 			});
+			// new Quill('#editor', {
+			// 	theme: 'snow'
+			// });
 		});
 	</script>
 
