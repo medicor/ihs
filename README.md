@@ -8,3 +8,6 @@ SPA web application for International Hip Society (IHS).
 <!--- [Netlify CMS](https://www.netlifycms.org/docs/add-to-your-site/)-->
 <!--- [Netlify Identity](https://www.netlify.com/docs/identity/)-->
 <!--- [Firebase](https://firebase.google.com/)-->
+
+## DEPRECATED
+Bootstrap-vue looks nicer, contains more functionaity and have about the same footprint.

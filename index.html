@@ -27,17 +27,15 @@
 	<link rel="manifest" href="manifest.json">
 
 	<link href="https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
-	<!--<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">-->
 	<link type="text/css" rel="stylesheet" href="styles/buefy.min.css" />
+	<!--<link type="text/css" rel="stylesheet" href="styles/materialdesignicons.min.css" />-->
 	<link type="text/css" rel="stylesheet" href="styles/styles.css" />
 
-	<!--<script src="scripts/polyfill.min.js"></script>-->
 	<script src="scripts/html-imports.min.js"></script>
 
 	<script src="scripts/vue.min.js"></script>
 	<script src="scripts/buefy.min.js"></script>
 	<script src="scripts/vue-router.min.js"></script>
-	<!--<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>-->
 
 	<link rel="import" href="components/home-section.html" />
 	<link rel="import" href="components/about-section.html" />
@@ -48,71 +46,73 @@
 <body>
 	<!-- Our application root element -->
 	<div id="app" v-cloak>
-		<b-navbar toggleable="md" variant="white" class="fixed-top">
-			<b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
-			<b-navbar-brand to="/home">
-				<img src="images/logo-75x50.png" alt="IHS">
-			</b-navbar-brand>
-			<b-collapse is-nav id="nav_collapse">
-				<b-navbar-nav class="ml-auto font-weight-bold">
-					<b-nav-item to="/home">Home</b-nav-item>
-					<!--<b-nav-item to="/education">Education</b-nav-item>-->
-					<!--<b-nav-item to="/research">Research</b-nav-item>-->
-					<!--<b-nav-item to="/awards">Awards</b-nav-item>-->
-					<!--<b-nav-item to="/events">Events</b-nav-item>-->
-					<b-nav-item to="/about">About Us</b-nav-item>
-					<b-nav-item to="/members">Members</b-nav-item>
-				</b-navbar-nav>
-			</b-collapse>
-		</b-navbar>
+		<nav class="navbar is-transparent is-fixed-top">
+			<div class="navbar-brand">
+				<router-link class="navbar-item" to="/home">
+					<img src="images/logo-75x50.png" alt="IHS" height="28">
+				</router-link>
+				<div class="navbar-burger burger" @click="toggleMenu" :class="{'is-active': navIsActive}" data-target="mainNav">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</div>
+			<div id="mainNav" class="navbar-menu" :class="{'is-active': navIsActive}">
+				<div class="navbar-start">
+					<router-link class="navbar-item" to="/home">Home</router-link>
+					<router-link class="navbar-item" to="/about">About us</router-link>
+					<router-link class="navbar-item" to="/members">Members</router-link>
+				</div>
+			</div>
+		</nav>
 
 		<router-view class="content"></router-view>
 
-		<b-container fluid class="text-light py-5 bg-secondary">
-			<b-container>
-				<b-row>
-					<b-col md="2" class="mb-4">
-						<a href="/">
-							<img src="images/logo-90x120.png" alt="IHS">
-						</a>
-					</b-col>
-					<b-col md="3">
-						<h5>
-							Address
-						</h5>
-						<p>
-							1234 Street Name
-							<br>City, AA 99999
-						</p>
-					</b-col>
-					<b-col md="4">
-						<h5>
-							Contacts
-						</h5>
-						<p>
-							Email: kajsa.erikson@unknown.com
-							<br> Phone: +46702856209
-						</p>
-					</b-col>
-					<b-col md="3">
-						<h5>
-							Links
-						</h5>
-						<p>
-							<a class="text-white" href="http://isarhome.org">ISAR</a>
-							<br>
-							<a class="text-white" href="http://hipsoc.org">US Hip Society</a>
-						</p>
-					</b-col>
-					<b-col md="12">
-						<hr class="bg-white">
-						<p>
-							© Copyright 2018 International Hip Society &mdash; All Rights Reserved.
-						</p>
-					</b-col>
-				</b-row>
-			</b-container>
-		</b-container>
+		<!--<b-container fluid class="text-light py-5 bg-secondary">-->
+		<!--	<b-container>-->
+		<!--		<b-row>-->
+		<!--			<b-col md="2" class="mb-4">-->
+		<!--				<a href="/">-->
+		<!--					<img src="images/logo-90x120.png" alt="IHS">-->
+		<!--				</a>-->
+		<!--			</b-col>-->
+		<!--			<b-col md="3">-->
+		<!--				<h5>-->
+		<!--					Address-->
+		<!--				</h5>-->
+		<!--				<p>-->
+		<!--					1234 Street Name-->
+		<!--					<br>City, AA 99999-->
+		<!--				</p>-->
+		<!--			</b-col>-->
+		<!--			<b-col md="4">-->
+		<!--				<h5>-->
+		<!--					Contacts-->
+		<!--				</h5>-->
+		<!--				<p>-->
+		<!--					Email: kajsa.erikson@unknown.com-->
+		<!--					<br> Phone: +46702856209-->
+		<!--				</p>-->
+		<!--			</b-col>-->
+		<!--			<b-col md="3">-->
+		<!--				<h5>-->
+		<!--					Links-->
+		<!--				</h5>-->
+		<!--				<p>-->
+		<!--					<a class="text-white" href="http://isarhome.org">ISAR</a>-->
+		<!--					<br>-->
+		<!--					<a class="text-white" href="http://hipsoc.org">US Hip Society</a>-->
+		<!--				</p>-->
+		<!--			</b-col>-->
+		<!--			<b-col md="12">-->
+		<!--				<hr class="bg-white">-->
+		<!--				<p>-->
+		<!--					© Copyright 2018 International Hip Society &mdash; All Rights Reserved.-->
+		<!--				</p>-->
+		<!--			</b-col>-->
+		<!--		</b-row>-->
+		<!--	</b-container>-->
+		<!--</b-container>-->
 
 	</div>
 
@@ -142,7 +142,15 @@
 							y: 0
 						};
 					}
-				})
+				}),
+				data: {
+					navIsActive: false
+				},
+				methods: {
+					toggleMenu: function() {
+						this.navIsActive = !this.navIsActive
+					}
+				}
 			});
 			// new Quill('#editor', {
 			// 	theme: 'snow'

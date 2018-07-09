@@ -1,29 +1,35 @@
 <template id="home-section">
 	<div>
-	<b-jumbotron fluid text-variant="white"
-		header="International Hip Society"
-		lead="This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.">
-	</b-jumbotron>
-	<b-container>
-		<b-card title="Title">
-			<p slot="header" class="mb-0">Header Slot</p>
-			<p class="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-				takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-				et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-				At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-			<b-button href="#" variant="primary">Go somewhere</b-button>
-		</b-card>
-	</b-container>
+	<section class="hero is-primary">
+		<div class="hero-body">
+			<div class="container">
+				<h1 class="title">International Hip Society</h1>
+				<h2 class="subtitle">Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.</h2>
+			</div>
+		</div>
+	</section>
+	<section class="section">
+		<div class="card">
+			<header class="card-header">
+				<p class="card-header-title">Header Slot</p>
+			</header>
+			<div class="card-content">
+				<div class="content">
+					Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+					takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+					et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+					At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+				</div>
+				<a href="#" class="button is-primary">Go somewhere</a>
+			</div>
+		</div>
+	</section>
 	</div>
 </template>
 
 <script>
 	/* global Vue */
 	Vue.component('home-section', {
-		template: document.currentScript.ownerDocument.getElementById('home-section').innerHTML,
-		data: function() {
-			return {};
-		},
-		methods: {}
+		template: document.currentScript.ownerDocument.getElementById('home-section').innerHTML
 	});
 </script>
