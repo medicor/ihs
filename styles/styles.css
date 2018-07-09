@@ -1,3 +1,8 @@
+
+[v-cloak] {
+	display: none;
+}
+
 html {
 	margin-top: 96px;
 }
@@ -41,8 +46,4 @@ html {
 		padding: 0.5rem 2rem;
 		min-height: inherit;
 	}
-}
-
-[v-cloak] {
-	display: none;
 }
