@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<!-- PageSpeed: mobile 69, desktop 91 (without cloaking) -->
+	<!-- PageSpeed: mobile 100, desktop 97 (without cloaking) -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="theme-color" content="#17727d">
@@ -30,22 +30,88 @@
 			display: none;
 		}
 	</style>
-	<script src="scripts/loader.js"></script>
+	<script type="text/javascript">
+		!(function(self) {
+		    let head = document.getElementsByTagName('head')[0];
+
+		    self.loaded = function(aURL) {
+		        var ok = false,
+		            us = aURL.toLowerCase(),
+		            sa = [].map.call(document.scripts, function(x) {
+		                return x.src;
+		            }).concat(
+		                [].map.call(document.styleSheets, function(x) {
+		                    return x.href;
+		                })
+		            );
+
+		        sa.forEach(function(st) {
+		            if (st && st.toLowerCase().indexOf(us) >= 0) {
+		                ok = true;
+		            }
+		        });
+		        return ok;
+		    },
+
+		    self.inject = function(aResourceList, aReadyCallback) {
+		        let ls = aResourceList.length;
+
+		        function load(aURL, aLoadedCallback) {
+		            let rn;
+
+		            if (self.loaded(aURL)) {
+		                aLoadedCallback();
+		                return;
+		            }
+		            if (aURL.indexOf('.css') > 0 || aURL.indexOf('fonts.googleapis.com') > 0) {
+		                rn = document.createElement('link');
+		                rn.href = aURL;
+		                rn.rel  = 'stylesheet';
+		                rn.type = 'text/css';
+		            } else {
+		                if (aURL.indexOf('.html') > 0) {
+		                    rn = document.createElement('link');
+		                    rn.href = aURL;
+		                    rn.rel  = 'import';
+		                } else { // Assume JavaScript (.js, .ashx).
+		                    rn = document.createElement('script');
+		                    rn.src = aURL;
+		                    rn.async = true;
+		                    rn.defer = true;
+		                }
+		            }
+		            rn.onload = aLoadedCallback;
+		            head.appendChild(rn);
+		        }
+		        aResourceList.forEach(function(rc) {
+		            load(rc, function() {
+		                if (--ls === 0) {
+		                    (aReadyCallback || function(){})();
+		                }
+		            });
+		        });
+		    };
+
+		})(window.Loader = {});
+	</script>
 
 </head>
 
 <body>
 	<!-- Our application root element -->
 	<div id="app" v-cloak>
-		<b-navbar toggleable="md" variant="white" fixed="top">
+		<b-navbar toggleable="md" variant="white" class="fixed-top">
 			<b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 			<b-navbar-brand to="/home">
 				<img src="images/logo-75x50.png" alt="IHS">
 			</b-navbar-brand>
 			<b-collapse is-nav id="nav_collapse">
-				<hr>
-				<b-navbar-nav class="ml-auto">
+				<b-navbar-nav class="ml-auto font-weight-bold">
 					<b-nav-item to="/home">Home</b-nav-item>
+					<!--<b-nav-item to="/education">Education</b-nav-item>-->
+					<!--<b-nav-item to="/research">Research</b-nav-item>-->
+					<!--<b-nav-item to="/awards">Awards</b-nav-item>-->
+					<!--<b-nav-item to="/events">Events</b-nav-item>-->
 					<b-nav-item to="/about">About Us</b-nav-item>
 					<b-nav-item to="/members">Members</b-nav-item>
 				</b-navbar-nav>
@@ -54,7 +120,7 @@
 
 		<router-view class="content"></router-view>
 
-		<b-container fluid class="text-light py-5 bg-secondary footer">
+		<b-container fluid class="text-light py-5 bg-secondary">
 			<b-container>
 				<b-row>
 					<b-col md="2" class="mb-4">
@@ -103,38 +169,24 @@
 	</div>
 
 	<script>
-		/* global Loader Vue VueRouter flamelink */
+		/* global Loader Vue VueRouter */
 		Loader.inject([
-			'scripts/vue.min.js',
-			'scripts/html-imports.min.js',
-			'https://cdn.polyfill.io/v2/polyfill.min.js?features=Promise,Array.prototype.includes',
 			'https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i,900,900i',
 			'styles/bootstrap.min.css',
 			'styles/bootstrap-vue.min.css',
 			'styles/styles.css',
-			'scripts/bootstrap-vue.min.js',
-			'scripts/firebase-app.min.js'
+			// 'https://cdn.quilljs.com/1.3.6/quill.js',
+			'scripts/html-imports.min.js',
+			'scripts/vue.min.js',
+			'scripts/bootstrap-vue.min.js'
 		], function() {
 			Loader.inject([
 				'scripts/vue-router.min.js',
-				'scripts/firebase-auth.min.js',
-				'scripts/firebase-database.min.js',
-				'scripts/flamelink.min.js',
-				'scripts/markdown.min.js',
-				'components/home-section.html?v=' + Math.random(),
-				'components/about-section.html?v=' + Math.random(),
-				'components/member-section.html?v=' + Math.random()
+				'components/home-section.html',
+				'components/about-section.html',
+				'components/member-section.html'
 			], function() {
-				window.app = {};
-				window.app.cms = flamelink({
-					apiKey: "AIzaSyAWnRDu3AALf22oBZIe19zfNlZFEWT6zRA",
-					authDomain: "isar-ff68f.firebaseapp.com",
-					databaseURL: "https://isar-ff68f.firebaseio.com",
-					projectId: "isar-ff68f",
-					storageBucket: "isar-ff68f.appspot.com",
-					messagingSenderId: "276017516797"
-				});
-				new Vue({
+				window.app = new Vue({
 					el: "#app",
 					router: new VueRouter({
 						routes: [{
@@ -158,13 +210,8 @@
 						}
 					})
 				});
-				// See https://github.com/yabwe/medium-editor/
-				// var editor = new MediumEditor('.editor', {
-				// 	// options go here
-				// });
-				// See https://quilljs.com/docs/quickstart/
 				// new Quill('#editor', {
-				//	theme: 'snow'
+				// 	theme: 'snow'
 				// });
 			});
 		});

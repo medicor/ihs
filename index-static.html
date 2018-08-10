@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<!-- PageSpeed: mobile 69, desktop 91 (without cloaking) -->
+	<!-- PageSpeed: mobile 49, desktop 81 (WITH cloaking) -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="theme-color" content="#17727d">
@@ -30,22 +30,43 @@
 			display: none;
 		}
 	</style>
-	<script src="scripts/loader.js"></script>
+
+	<link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i,900,900i">
+	<link rel="stylesheet" href="styles/bootstrap.min.css" />
+	<link rel="stylesheet" href="styles/bootstrap-vue.min.css" />
+	<link rel="stylesheet" href="styles/styles.css" />
+
+	<script src="scripts/polyfill.min.js"></script>
+	<script src="scripts/html-imports.min.js"></script>
+	<script src="scripts/vue-router.min.js"></script>
+	<script src="scripts/bootstrap-vue.min.js"></script>
+	<script src="scripts/firebase-app.min.js"></script>
+	<script src="scripts/markdown.min.js"></script>
+	<script src="scripts/firebase-auth.min.js"></script>
+	<script src="scripts/firebase-database.min.js"></script>
+	<script src="scripts/flamelink.min.js"></script>
+
+	<link rel="import" href="components/home-section.html" />
+	<link rel="import" href="components/about-section.html" />
+	<link rel="import" href="components/member-section.html" />
 
 </head>
 
 <body>
 	<!-- Our application root element -->
 	<div id="app" v-cloak>
-		<b-navbar toggleable="md" variant="white" fixed="top">
+		<b-navbar toggleable="md" variant="white" class="fixed-top">
 			<b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
 			<b-navbar-brand to="/home">
 				<img src="images/logo-75x50.png" alt="IHS">
 			</b-navbar-brand>
 			<b-collapse is-nav id="nav_collapse">
-				<hr>
-				<b-navbar-nav class="ml-auto">
+				<b-navbar-nav class="ml-auto font-weight-bold">
 					<b-nav-item to="/home">Home</b-nav-item>
+					<!--<b-nav-item to="/education">Education</b-nav-item>-->
+					<!--<b-nav-item to="/research">Research</b-nav-item>-->
+					<!--<b-nav-item to="/awards">Awards</b-nav-item>-->
+					<!--<b-nav-item to="/events">Events</b-nav-item>-->
 					<b-nav-item to="/about">About Us</b-nav-item>
 					<b-nav-item to="/members">Members</b-nav-item>
 				</b-navbar-nav>
@@ -54,7 +75,7 @@
 
 		<router-view class="content"></router-view>
 
-		<b-container fluid class="text-light py-5 bg-secondary footer">
+		<b-container fluid class="text-light py-5 bg-secondary">
 			<b-container>
 				<b-row>
 					<b-col md="2" class="mb-4">
@@ -103,70 +124,35 @@
 	</div>
 
 	<script>
-		/* global Loader Vue VueRouter flamelink */
-		Loader.inject([
-			'scripts/vue.min.js',
-			'scripts/html-imports.min.js',
-			'https://cdn.polyfill.io/v2/polyfill.min.js?features=Promise,Array.prototype.includes',
-			'https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i,900,900i',
-			'styles/bootstrap.min.css',
-			'styles/bootstrap-vue.min.css',
-			'styles/styles.css',
-			'scripts/bootstrap-vue.min.js',
-			'scripts/firebase-app.min.js'
-		], function() {
-			Loader.inject([
-				'scripts/vue-router.min.js',
-				'scripts/firebase-auth.min.js',
-				'scripts/firebase-database.min.js',
-				'scripts/flamelink.min.js',
-				'scripts/markdown.min.js',
-				'components/home-section.html?v=' + Math.random(),
-				'components/about-section.html?v=' + Math.random(),
-				'components/member-section.html?v=' + Math.random()
-			], function() {
-				window.app = {};
-				window.app.cms = flamelink({
-					apiKey: "AIzaSyAWnRDu3AALf22oBZIe19zfNlZFEWT6zRA",
-					authDomain: "isar-ff68f.firebaseapp.com",
-					databaseURL: "https://isar-ff68f.firebaseio.com",
-					projectId: "isar-ff68f",
-					storageBucket: "isar-ff68f.appspot.com",
-					messagingSenderId: "276017516797"
-				});
-				new Vue({
-					el: "#app",
-					router: new VueRouter({
-						routes: [{
-							path: '/',
-							redirect: '/home'
-						}, {
-							path: '/home',
-							component: Vue.component('home-section')
-						}, {
-							path: '/members',
-							component: Vue.component('member-section')
-						}, {
-							path: '/about',
-							component: Vue.component('about-section')
-						}],
-						scrollBehavior: function() {
-							return {
-								x: 0,
-								y: 0
-							};
-						}
-					})
-				});
-				// See https://github.com/yabwe/medium-editor/
-				// var editor = new MediumEditor('.editor', {
-				// 	// options go here
-				// });
-				// See https://quilljs.com/docs/quickstart/
-				// new Quill('#editor', {
-				//	theme: 'snow'
-				// });
+		/* global Vue VueRouter */
+		window.addEventListener('HTMLImportsLoaded', function() { // IE11 polyfill through webcomponents.org.
+			window.app = new Vue({
+				el: "#app",
+				router: new VueRouter({
+					routes: [{
+						path: '/',
+						redirect: '/home'
+					}, {
+						path: '/home',
+						component: Vue.component('home-section')
+					}, {
+						path: '/members',
+						component: Vue.component('member-section')
+					}, {
+						path: '/about',
+						component: Vue.component('about-section')
+					}],
+					scrollBehavior: function() {
+						return {
+							x: 0,
+							y: 0
+						};
+					}
+				})
 			});
+			// new Quill('#editor', {
+			// 	theme: 'snow'
+			// });
 		});
 	</script>
 

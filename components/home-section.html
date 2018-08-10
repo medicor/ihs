@@ -2,16 +2,17 @@
 	<div>
 	<b-jumbotron fluid text-variant="white"
 		header="International Hip Society"
-		lead="This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.">
+		lead="Development and dissemination of knowledge, research and study on the afflictions of the hip.">
 	</b-jumbotron>
 	<b-container>
-		<b-card title="Title">
-			<p slot="header" class="mb-0">Header Slot</p>
+		<div v-if="loading" :class="{ loader: loading }"></div>
+		<b-card class="mb-4 fade" v-for="post in posts" :title="post.title">
+			<p slot="header" class="mb-0">{{ post.__meta__.lastModifiedDate }}</p>
 			<p class="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
 				takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
 				et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-				At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
-			<b-button href="#" variant="primary">Go somewhere</b-button>
+				At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+			</p>
 		</b-card>
 	</b-container>
 	</div>
@@ -22,8 +23,23 @@
 	Vue.component('home-section', {
 		template: document.currentScript.ownerDocument.getElementById('home-section').innerHTML,
 		data: function() {
-			return {};
+			return {
+				posts: null,
+				loading: true
+			};
 		},
-		methods: {}
+		created: function() {
+			var self = this;
+			window.app.cms.content.get('post')
+				.then(function(result) {
+					// https://github.com/evilstreak/markdown-js
+					// markdown.toHTML( md_content );
+					self.posts = result;
+					self.loading = false;
+				})
+				.catch(function(ex) {
+					console.error('Something went wrong while retrieving the entry. Details:', ex);
+				});
+		}
 	});
 </script>
