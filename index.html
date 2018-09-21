@@ -35,7 +35,6 @@
 </head>
 
 <body>
-	<!-- Our application root element -->
 	<div id="app" v-cloak>
 		<b-navbar toggleable="md" variant="white" fixed="top">
 			<b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
@@ -58,43 +57,22 @@
 			<b-container>
 				<b-row>
 					<b-col md="2" class="mb-4">
-						<a href="/">
-							<img src="images/logo-90x120.png" alt="IHS">
-						</a>
-					</b-col>
-					<b-col md="3">
-						<h5>
-							Address
-						</h5>
-						<p>
-							1234 Street Name
-							<br>City, AA 99999
-						</p>
+						<a href="/"><img src="images/logo-90x120.png" alt="IHS"></a>
 					</b-col>
 					<b-col md="4">
-						<h5>
-							Contacts
-						</h5>
-						<p>
-							Email: info@ihshome.org
-							<br> Phone: +46702856209
-						</p>
+						<h5>Contacts</h5>
+						<p>Email: info@ihshome.org</p>
 					</b-col>
 					<b-col md="3">
-						<h5>
-							Links
-						</h5>
+						<h5>Links</h5>
 						<p>
-							<a class="text-white" href="http://isarhome.org">ISAR</a>
-							<br>
+							<a class="text-white" href="http://isarhome.org">ISAR</a><br>
 							<a class="text-white" href="http://hipsoc.org">US Hip Society</a>
 						</p>
 					</b-col>
 					<b-col md="12">
 						<hr class="bg-white">
-						<p>
-							© Copyright 2018 International Hip Society &mdash; All Rights Reserved.
-						</p>
+						<p>© Copyright 2018 International Hip Society &mdash; All Rights Reserved.</p>
 					</b-col>
 				</b-row>
 			</b-container>
@@ -103,37 +81,26 @@
 	</div>
 
 	<script>
-		/* global Loader Vue VueRouter flamelink */
+		/* global Loader Vue VueRouter */
 		Loader.inject([
-			'scripts/vue.min.js',
-			'scripts/html-imports.min.js',
 			'https://cdn.polyfill.io/v2/polyfill.min.js?features=Promise,Array.prototype.includes',
 			'https://fonts.googleapis.com/css?family=Rubik:300,300i,400,400i,500,500i,700,700i,900,900i',
+			'https://app.storyblok.com/f/storyblok-latest.js?t=sPelOKhhnmfOF0tTHvESRgtt',
+			'scripts/vue.min.js',
+			'scripts/html-imports.min.js',
 			'styles/bootstrap.min.css',
 			'styles/bootstrap-vue.min.css',
-			'styles/styles.css',
 			'scripts/bootstrap-vue.min.js',
-			'scripts/firebase-app.min.js'
+			'styles/styles.css'
 		], function() {
 			Loader.inject([
 				'scripts/vue-router.min.js',
-				'scripts/firebase-auth.min.js',
-				'scripts/firebase-database.min.js',
-				'scripts/flamelink.min.js',
+				'scripts/storyblok-vue.js',
 				'scripts/markdown.min.js',
-				'components/home-section.html?v=' + Math.random(),
-				'components/about-section.html?v=' + Math.random(),
-				'components/member-section.html?v=' + Math.random()
+				'components/home-section.html',
+				'components/about-section.html',
+				'components/member-section.html'
 			], function() {
-				window.app = {};
-				window.app.cms = flamelink({
-					apiKey: "AIzaSyAWnRDu3AALf22oBZIe19zfNlZFEWT6zRA",
-					authDomain: "isar-ff68f.firebaseapp.com",
-					databaseURL: "https://isar-ff68f.firebaseio.com",
-					projectId: "isar-ff68f",
-					storageBucket: "isar-ff68f.appspot.com",
-					messagingSenderId: "276017516797"
-				});
 				new Vue({
 					el: "#app",
 					router: new VueRouter({
@@ -158,14 +125,6 @@
 						}
 					})
 				});
-				// See https://github.com/yabwe/medium-editor/
-				// var editor = new MediumEditor('.editor', {
-				// 	// options go here
-				// });
-				// See https://quilljs.com/docs/quickstart/
-				// new Quill('#editor', {
-				//	theme: 'snow'
-				// });
 			});
 		});
 	</script>

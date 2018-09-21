@@ -2,44 +2,53 @@
 	<div>
 	<b-jumbotron fluid text-variant="white"
 		header="International Hip Society"
-		lead="Development and dissemination of knowledge, research and study on the afflictions of the hip.">
+		lead="For the development and dissemination of knowledge, research and study on the afflictions of the hip. To provide appropriate educational setting that will maintain the highest level of professional standards that will lead to continuous advances in professional knowledge and treatment of disorders of the hip.">
 	</b-jumbotron>
 	<b-container>
 		<div v-if="loading" :class="{ loader: loading }"></div>
-		<b-card class="mb-4 fade" v-for="post in posts" :title="post.title">
-			<p slot="header" class="mb-0">{{ post.__meta__.lastModifiedDate }}</p>
-			<p class="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
-				takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-				et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-				At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-			</p>
+		<b-card class="mb-4 fade" v-editable="post" v-for="post in posts" :title="post.title" :key="post._uid">
+			<p slot="header" class="mb-0">{{ post.published }}</p>
+			<p class="card-text">{{ post.body }}</p>
 		</b-card>
 	</b-container>
 	</div>
 </template>
 
 <script>
-	/* global Vue */
+	/* global Vue Storyblok */
 	Vue.component('home-section', {
 		template: document.currentScript.ownerDocument.getElementById('home-section').innerHTML,
 		data: function() {
 			return {
-				posts: null,
-				loading: true
+				loading: true,
+				posts: []
 			};
+		},
+		methods: {
+			loadStory: function(version) {
+				var self = this;
+				Storyblok.get({
+					slug: 'home',
+					version: version
+				}, function(data) {
+					self.$nextTick(function() {
+						self.posts = data.story.content.body;
+						self.loading = false;
+					});
+				});
+			}
 		},
 		created: function() {
 			var self = this;
-			window.app.cms.content.get('post')
-				.then(function(result) {
-					// https://github.com/evilstreak/markdown-js
-					// markdown.toHTML( md_content );
-					self.posts = result;
-					self.loading = false;
-				})
-				.catch(function(ex) {
-					console.error('Something went wrong while retrieving the entry. Details:', ex);
-				});
+			Storyblok.on('change', function() {
+				self.loadStory('draft');
+			});
+			Storyblok.on('published', function() {
+				self.loadStory('draft');
+			});
+			Storyblok.pingEditor(function() {
+				self.loadStory(Storyblok.inEditor ? 'draft' : 'published');
+			});
 		}
 	});
 </script>
